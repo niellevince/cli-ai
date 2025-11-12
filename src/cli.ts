@@ -7,6 +7,21 @@ import { detectShell, getShellInfo } from './shell';
 import { copyToClipboardOrHistory } from './clipboard';
 import { config } from './config';
 
+/**
+ * Formats a command in a beautiful box
+ * @param command The command to display
+ * @returns Formatted string with box around command
+ */
+function formatCommandBox(command: string): string {
+  const padding = 2; // Padding on each side
+  const width = command.length + (padding * 2);
+  const topBorder = `╔${'═'.repeat(width)}╗`;
+  const bottomBorder = `╚${'═'.repeat(width)}╝`;
+  const middleLine = `║${' '.repeat(padding)}${command}${' '.repeat(padding)}║`;
+  
+  return `\n${topBorder}\n${middleLine}\n${bottomBorder}`;
+}
+
 const program = new Command();
 
 program
@@ -35,14 +50,14 @@ program
 
       // Skip confirmation if --yes flag is provided
       if (options.yes) {
-        console.log(`\n${command}`);
+        console.log(formatCommandBox(command));
         await copyToClipboardOrHistory({ command, shell });
         return;
       }
 
       // Interactive confirmation loop
       while (true) {
-        console.log(`\n📝 Generated command:\n${command}`);
+        console.log(`\n📝 Generated command:${formatCommandBox(command)}`);
 
         const { action } = await inquirer.prompt([
           {
