@@ -1,0 +1,36 @@
+{
+    "name": "clai",
+    "version": "1.0.0",
+    "description": "CLI-AI: Generate shell commands from natural language using AI",
+    "main": "lib/cli.js",
+    "bin": {
+        "clai": "./bin/clai.js"
+    },
+    "scripts": {
+        "build": "tsc",
+        "start": "node bin/clai.js",
+        "dev": "ts-node src/cli.ts",
+        "clean": "rm -rf lib bin/*.js bin/*.d.ts"
+    },
+    "keywords": [
+        "cli",
+        "ai",
+        "shell",
+        "commands",
+        "openrouter"
+    ],
+    "author": "niellevince",
+    "license": "MIT",
+    "dependencies": {
+        "commander": "^12.0.0",
+        "openai": "^4.52.7",
+        "inquirer": "^10.1.8",
+        "clipboardy": "^4.0.0",
+        "dotenv": "^16.4.5"
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "typescript": "^5.0.0",
+        "ts-node": "^10.9.0"
+    }
+}
