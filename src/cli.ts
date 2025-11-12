@@ -13,19 +13,20 @@ program
   .name('clai')
   .description('Generate shell commands from natural language using AI')
   .version('1.0.0')
-  .argument('<query>', 'Describe the command you want to generate')
+  .arguments('[query...]')
   .option('-m, --model <model>', 'AI model to use', config.defaultModel)
   .option('--shell <shell>', 'Target shell (bash, zsh, powershell, cmd, fish)', detectShell())
   .option('-y, --yes', 'Skip confirmation and automatically accept/copy command')
-  .action(async (query: string, options: any) => {
+  .action(async (query: string[], options: any) => {
     try {
       const shell = options.shell;
       const model = options.model;
+      const queryText = query.join(' ');
 
       console.log(`🤖 Generating ${getShellInfo(shell)} using ${model}...`);
 
       // Generate the initial command
-      let command = await generateCommand({ query, shell, model });
+      let command = await generateCommand({ query: queryText, shell, model });
 
       // Validate the generated command
       if (!validateCommand(command)) {
@@ -61,7 +62,7 @@ program
           break;
         } else if (action === 'regenerate') {
           console.log('🔄 Regenerating command...');
-          command = await generateCommand({ query, shell, model });
+          command = await generateCommand({ query: queryText, shell, model });
 
           if (!validateCommand(command)) {
             console.warn('⚠️  Regenerated command failed validation, but proceeding...');
@@ -93,10 +94,10 @@ program
 // Handle --help flag
 program.on('--help', () => {
   console.log('\n📚 Examples:');
-  console.log('  $ clai "create a docker redis container"');
-  console.log('  $ clai "list all files in current directory" --shell powershell');
-  console.log('  $ clai "update nginx config" -m anthropic/claude-3-haiku');
-  console.log('  $ clai "restart apache service" -y');
+  console.log('  $ clai create a docker redis container');
+  console.log('  $ clai list all files in current directory --shell powershell');
+  console.log('  $ clai update nginx config -m anthropic/claude-3-haiku');
+  console.log('  $ clai restart apache service -y');
   console.log('\n🔗 Learn more: https://openrouter.ai/docs');
 });
 

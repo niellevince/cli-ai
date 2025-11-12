@@ -50,25 +50,27 @@ Required environment variables:
 ### Basic Usage
 
 ```bash
-clai "create a docker redis container with port mapping"
-clai "find all .js files in current directory"
-clai "update system packages on ubuntu"
+clai create a docker redis container with port mapping
+clai find all .js files in current directory
+clai update system packages on ubuntu
 ```
+
+> **Note**: Quotes around queries are optional - both `clai "list files"` and `clai list files` work.
 
 ### Advanced Options
 
 ```bash
 # Specify target shell
-clai "list directory contents" --shell powershell
+clai list directory contents --shell powershell
 
 # Use different AI model (short: -m)
-clai "restart nginx service" -m anthropic/claude-3-haiku
+clai restart nginx service -m anthropic/claude-3-haiku
 
 # Skip confirmation (short: -y, for scripts/automation)
-clai "create backup of current directory" -y
+clai create backup of current directory -y
 
 # Combine options
-clai "install python dependencies" --shell bash -m openai/gpt-4o-mini -y
+clai install python dependencies --shell bash -m openai/gpt-4o-mini -y
 ```
 
 ### Interactive Mode
@@ -135,13 +137,13 @@ clai/
 npm install
 
 # Run in development mode (with ts-node)
-npm run dev "create a docker container"
+npm run dev create a docker container
 
 # Build for production
 npm run build
 
 # Run built version
-npm start "list files"
+npm start list files
 
 # Clean build artifacts
 npm run clean
@@ -151,13 +153,13 @@ npm run clean
 
 ```bash
 # Test basic functionality
-npm run dev "list current directory"
+npm run dev list current directory
 
 # Test with different shell
-npm run dev "show system info" -- --shell powershell
+npm run dev show system info -- --shell powershell
 
 # Test headless mode (simulate server environment)
-unset DISPLAY && npm run dev "update packages"
+unset DISPLAY && npm run dev update packages
 ```
 
 ## 🔒 Security
