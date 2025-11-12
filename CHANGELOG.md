@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2025-01-XX
+
+### Added
+
+- **PowerShell history support**: Commands are now automatically added to PowerShell history using `Add-History` cmdlet
+- **Dual operation mode**: Commands are now copied to clipboard AND added to shell history simultaneously (when supported)
+
+### Changed
+
+- **Improved clipboard/history behavior**: Removed headless environment detection - now always attempts both clipboard copy and history addition
+- **Enhanced error handling**: Operations fail silently with independent error handling for clipboard and history operations
+- Better user experience: Users get commands in both clipboard and shell history for maximum convenience
+
+### Technical
+
+- Modified `src/clipboard.ts` to always attempt both clipboard and history operations
+- Added PowerShell history support via `Add-History` cmdlet
+- Removed `isHeadless()` function as it's no longer needed
+- Simplified error handling with "run and forget" approach
+
 ## [1.1.0] - 2025-11-12
 
 ### Added
