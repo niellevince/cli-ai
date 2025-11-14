@@ -1,7 +1,18 @@
 import * as dotenv from 'dotenv';
+import * as path from 'path';
+import * as fs from 'fs';
 
-// Load environment variables from .env file
-dotenv.config();
+// Get the project root directory (one level up from lib/ or src/)
+const projectRoot = path.resolve(__dirname, '..');
+
+// Load environment variables from .env file in project root
+const envPath = path.join(projectRoot, '.env');
+if (fs.existsSync(envPath)) {
+  dotenv.config({ path: envPath });
+} else {
+  // Fallback to default behavior if .env doesn't exist in project root
+  dotenv.config();
+}
 
 export interface Config {
   openRouterApiKey: string;
